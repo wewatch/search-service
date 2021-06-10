@@ -1,0 +1,90 @@
+service: search-service
+
+plugins:
+  - serverless-aws-documentation
+  - serverless-plugin-typescript
+  - serverless-reqvalidator-plugin
+  - serverless-plugin-log-retention
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: ${env:REGION}
+
+useDotenv: true
+
+functions:
+  default:
+    handler: src/index.default
+    memorySize: 128
+    events:
+      - http:
+          path: /search
+          method: post
+          cors:
+            origins:
+              - "*"
+            headers:
+              - Content-Type
+          reqValidatorName: SearchRequestValidator
+          documentation:
+            requestModels:
+              application/json: VideoSearchRequest
+    environment:
+      API_KEY: ${env:API_KEY}
+
+resources:
+  Resources:
+    SearchRequestValidator:
+      Type: AWS::ApiGateway::RequestValidator
+      Properties:
+        RestApiId:
+          Ref: ApiGatewayRestApi
+        ValidateRequestBody: true
+        ValidateRequestParameters: false
+
+custom:
+  logRetentionInDays: 7
+  documentation:
+    api:
+      info:
+        version: "1.0.0"
+        title: Video Search API
+    models:
+      - name: VideoSearchRequest
+        contentType: application/json
+        schema:
+          required:
+            - query
+            - type
+          properties:
+            query:
+              type: string
+            type:
+              type: string
+              enum:
+                - youtube
+      - name: VideoSearchResponse
+        contentType: application/json
+        schema:
+          type: array
+          items:
+            type: object
+            required:
+              - url
+              - thumbnailUrl
+              - title
+            properties:
+              url:
+                type: string
+              thumbnailUrl:
+                type: string
+              title:
+                type: string
+      - name: 400JsonResponse
+        contentType: "application/json"
+        schema:
+          type: object
+          properties:
+            message:
+              type: string

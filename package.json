@@ -1,0 +1,48 @@
+{
+  "name": "@wewatch/search-service",
+  "version": "1.0.0",
+  "author": "Duc-Minh Phan <alephvn@gmail.com>",
+  "license": "AGPL-3.0-only",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier --write \"./**/*.{css,js,jsx,ts,tsx,yaml,yml,md}\"",
+    "lint": "eslint . --ext .js,.ts --fix",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wewatch/search-service.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/wewatch/search-service/issues"
+  },
+  "homepage": "https://github.com/wewatch/search-service#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cheerio": "^1.0.0-rc.10"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.77",
+    "@types/node": "^15.12.2",
+    "@typescript-eslint/eslint-plugin": "^4.26.1",
+    "@typescript-eslint/parser": "^4.26.1",
+    "aws-lambda": "^1.0.6",
+    "eslint": "^7.28.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.1",
+    "serverless": "^2.45.2",
+    "serverless-aws-documentation": "^1.1.0",
+    "serverless-plugin-log-retention": "^2.0.0",
+    "serverless-plugin-typescript": "^1.1.9",
+    "serverless-reqvalidator-plugin": "^1.0.4",
+    "typescript": "^4.3.2"
+  }
+}
