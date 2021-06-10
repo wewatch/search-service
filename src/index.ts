@@ -1,11 +1,21 @@
-import { APIGatewayEvent, APIGatewayProxyResult } from "aws-lambda";
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 
 import searchYoutube from "./handlers/youtube";
 import { VideoSearchRequest, VideoSearchResponseItem } from "./interface";
 
 export default async (
-  event: APIGatewayEvent,
+  event: APIGatewayProxyEvent,
 ): Promise<APIGatewayProxyResult> => {
+  const apiKey = event.headers?.["X-API-KEY"];
+  if (apiKey !== process.env.API_KEY) {
+    return {
+      statusCode: 401,
+      body: JSON.stringify({
+        message: "Invalid API key",
+      }),
+    };
+  }
+
   if (event.body === null) {
     return {
       statusCode: 400,
