@@ -63,7 +63,7 @@ custom:
             type:
               type: string
               enum:
-                - youtube
+                - YouTube
       - name: VideoSearchResponse
         contentType: application/json
         schema:

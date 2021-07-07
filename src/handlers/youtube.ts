@@ -4,9 +4,15 @@ import { DataNode } from "domhandler/lib/node";
 
 import type { VideoSearchResponseItem } from "../interface";
 
-export default async (query: string): Promise<VideoSearchResponseItem[]> => {
-  const url = `https://www.youtube.com/results?search_query=${query}`;
-  const data = (await axios.get(url)).data;
+export default async (
+  search_query: string,
+): Promise<VideoSearchResponseItem[]> => {
+  const url = "https://www.youtube.com/results";
+  const { data } = await axios.get(url, {
+    params: {
+      search_query,
+    },
+  });
   const $ = cheerio.load(data);
   const scripts = $("script");
 
