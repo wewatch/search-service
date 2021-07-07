@@ -56,11 +56,11 @@ custom:
         schema:
           required:
             - query
-            - type
+            - provider
           properties:
             query:
               type: string
-            type:
+            provider:
               type: string
               enum:
                 - YouTube

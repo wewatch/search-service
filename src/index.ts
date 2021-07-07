@@ -22,7 +22,7 @@ export default async (
   }
 
   const request = JSON.parse(event.body) as VideoSearchRequest;
-  if (!(request.type in SupportedProvider)) {
+  if (!(request.provider in SupportedProvider)) {
     return generateMessageResponse(400, "Unsupported provider");
   }
 
@@ -32,7 +32,7 @@ export default async (
     if (result.length === 0) {
       return generateMessageResponse(400, "Unsupported provider");
     }
-  } else if (request.type === SupportedProvider.YouTube) {
+  } else if (request.provider === SupportedProvider.YouTube) {
     result = await searchYoutube(request.query);
   }
 

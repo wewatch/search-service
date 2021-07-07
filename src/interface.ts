@@ -4,7 +4,7 @@ export enum SupportedProvider {
 
 export interface VideoSearchRequest {
   query: string;
-  type: SupportedProvider;
+  provider: SupportedProvider;
 }
 export interface VideoSearchResponseItem {
   url: string;
