@@ -21,6 +21,8 @@ export default async (
     return generateMessageResponse(400, "Invalid request body");
   }
 
+  console.log(`Request body: ${event.body}`);
+
   const request = JSON.parse(event.body) as VideoSearchRequest;
   if (!(request.provider in SupportedProvider)) {
     return generateMessageResponse(400, "Unsupported provider");
@@ -30,7 +32,7 @@ export default async (
   if (isUrl(request.query)) {
     result = await searchURL(request.query);
     if (result.length === 0) {
-      return generateMessageResponse(400, "Unsupported provider");
+      return generateMessageResponse(400, "Unsupported URL");
     }
   } else if (request.provider === SupportedProvider.YouTube) {
     result = await searchYoutube(request.query);
